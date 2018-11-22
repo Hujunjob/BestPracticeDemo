@@ -36,6 +36,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.VH> {
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_1, viewGroup, false);
         mContext = viewGroup.getContext();
         screenHeight = viewGroup.getHeight();
+        Log.d(TAG, "onCreateViewHolder: ");
         return new VH(view);
     }
 
@@ -51,10 +52,9 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.VH> {
         ViewGroup.LayoutParams params = vh.itemView.getLayoutParams();
         if (i == 0 && names.size() == 1) {
             params.height = screenHeight;
-        }else if (names.size()==2){
-            params.height = screenHeight;
-        }
-        else {
+        } else if (names.size() == 2) {
+            params.height = screenHeight/2;
+        } else {
             params.height = screenHeight / 2;
         }
         vh.itemView.setLayoutParams(params);
@@ -71,8 +71,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.VH> {
         TextView textView;
         SurfaceView surfaceView;
 
-        public VH(@NonNull View itemView) {
-
+        VH(@NonNull View itemView) {
             super(itemView);
             textView = itemView.findViewById(R.id.txt_name);
             surfaceView = itemView.findViewById(R.id.surface);
@@ -101,10 +100,10 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.VH> {
 
     public void add(String name) {
         names.add(name);
+        notifyItemInserted(names.size());
         if (names.size() == 2) {
             notifyItemChanged(0);
         }
-        notifyItemInserted(names.size());
     }
 
     public void delete() {
@@ -113,7 +112,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.VH> {
         }
         names.remove(names.size() - 1);
         notifyItemRemoved(names.size() - 1);
-        if (names.size()==1){
+        if (names.size() == 1) {
             notifyItemChanged(0);
         }
     }

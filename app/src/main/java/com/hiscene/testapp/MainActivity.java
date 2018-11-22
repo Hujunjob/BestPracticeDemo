@@ -6,6 +6,7 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.OrientationHelper;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SimpleItemAnimator;
 import android.util.Log;
 import android.view.View;
 
@@ -74,8 +75,8 @@ public class MainActivity extends Activity implements View.OnClickListener {
 
         myAdapter = new MyAdapter();
         recyclerView.setAdapter(myAdapter);
-
         recyclerView.setItemAnimator(new DefaultItemAnimator());
+        ((SimpleItemAnimator)recyclerView.getItemAnimator()).setSupportsChangeAnimations(false);
 
         findViewById(R.id.btn_add).setOnClickListener(this);
         findViewById(R.id.btn_del).setOnClickListener(this);

@@ -66,7 +66,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
                     }
                 }
 
-                Log.d(TAG, "getSpanSize: i="+i+",span="+span);
+//                Log.d(TAG, "getSpanSize: i="+i+",span="+span);
                 return span;
             }
         });
@@ -76,6 +76,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
         myAdapter = new MyAdapter();
         recyclerView.setAdapter(myAdapter);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
+        //添加setSupportsChangeAnimations(false)可以防止在插入、修改item时，重建item
         ((SimpleItemAnimator)recyclerView.getItemAnimator()).setSupportsChangeAnimations(false);
 
         findViewById(R.id.btn_add).setOnClickListener(this);

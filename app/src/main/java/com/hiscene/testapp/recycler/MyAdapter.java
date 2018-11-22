@@ -53,7 +53,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.VH> {
         if (i == 0 && names.size() == 1) {
             params.height = screenHeight;
         } else if (names.size() == 2) {
-            params.height = screenHeight/2;
+            params.height = screenHeight;
         } else {
             params.height = screenHeight / 2;
         }
@@ -104,6 +104,10 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.VH> {
         if (names.size() == 2) {
             notifyItemChanged(0);
         }
+        if (names.size() == 3){
+            notifyItemChanged(0);
+            notifyItemChanged(1);
+        }
     }
 
     public void delete() {
@@ -113,6 +117,10 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.VH> {
         names.remove(names.size() - 1);
         notifyItemRemoved(names.size() - 1);
         if (names.size() == 1) {
+            notifyItemChanged(0);
+        }
+        if (names.size() == 2){
+            notifyItemChanged(1);
             notifyItemChanged(0);
         }
     }

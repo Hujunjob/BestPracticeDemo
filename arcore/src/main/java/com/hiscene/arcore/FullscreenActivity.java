@@ -2,6 +2,7 @@ package com.hiscene.arcore;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -15,6 +16,7 @@ import io.reactivex.schedulers.Schedulers;
  * status bar and navigation/system bar) with user interaction.
  */
 public class FullscreenActivity extends Activity {
+    private static final String TAG = "FullscreenActivityTAG";
     private NetworkMonitor networkMonitor;
     private TextView txtLoss,txtDelay;
 
@@ -45,6 +47,8 @@ public class FullscreenActivity extends Activity {
                         } else {
                             txtLoss.setVisibility(View.GONE);
                         }
+                    },throwable -> {
+                        Log.e(TAG, "onCreate: "+throwable.getLocalizedMessage());
                     });
         });
 

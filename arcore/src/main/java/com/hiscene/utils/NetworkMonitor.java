@@ -16,7 +16,8 @@ import io.reactivex.disposables.Disposable;
 
 public class NetworkMonitor {
     private static final String TAG = "NetworkMonitorTAG";
-    public static final int LOSS_GAP = 20;
+    public static final int LOSS_GAP = 50;
+    public static final int MIN_GAP = 10;
     private Observable<NetworkQuality> observable;
     private ObservableEmitter<NetworkQuality> networkEmitter;
     private Disposable timer;
@@ -24,6 +25,7 @@ public class NetworkMonitor {
     private int lastIcmp;
     private int checkIcmp;
     private Queue<Integer> icmpQueue;
+    private Queue<Integer> icmpSmallQueue;
 
     public Observable<NetworkQuality> start() {
         if (monitor) {
@@ -31,11 +33,12 @@ public class NetworkMonitor {
         }
         monitor = true;
         icmpQueue = new ArrayBlockingQueue<>(LOSS_GAP);
+        icmpSmallQueue = new ArrayBlockingQueue<>(MIN_GAP);
         observable = Observable.create(emitter -> {
             try {
                 networkEmitter = emitter;
                 //java层，调用Android Linux内核终端工具
-                Process process = Runtime.getRuntime().exec("ping -c 1000 www.baidu.com");
+                Process process = Runtime.getRuntime().exec("ping www.baidu.com");
                 BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(process.getInputStream()));
                 String str = null;
                 NetworkQuality quality = new NetworkQuality();
@@ -43,6 +46,9 @@ public class NetworkMonitor {
                     Log4aUtil.d(TAG, "checkNetworkQuality %s", str);
 
                     //计算实时丢包率，每隔LOSS_GAP计算一次
+                    //有大小精度，大测量范围LOSS_GAP可以减弱某次小丢包导致丢包率很大
+                    //但是LOSS_GAP会导致测量变化太小，只要一次丢包，很长时间丢包率都不会减少
+                    //MIN_GAP为小范围，如果小范围内丢包维持为0，则直接将丢包率置为0，可以增加丢包率灵敏度
                     if (str.contains("icmp_seq")) {
                         int start = str.lastIndexOf("icmp_seq=");
                         int end = str.indexOf("ttl=");
@@ -63,6 +69,17 @@ public class NetworkMonitor {
                             icmpQueue.add(icmp);
                             loss = (double) (icmp - icmp0 - LOSS_GAP) / (double) LOSS_GAP;
                         }
+                        //如果连续10个没有丢包，则丢包设为0
+                        if (icmpSmallQueue.size() == MIN_GAP) {
+                            int first = icmpSmallQueue.remove();
+                            icmpSmallQueue.add(icmp);
+                            if (icmp - first == MIN_GAP) {
+                                loss = 0;
+                            }
+                        } else {
+                            icmpSmallQueue.add(icmp);
+                        }
+
                         quality.loss = loss * 100;
                         lastIcmp = icmp;
                     }

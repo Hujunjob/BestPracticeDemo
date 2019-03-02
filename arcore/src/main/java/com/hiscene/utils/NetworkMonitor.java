@@ -16,7 +16,7 @@ import io.reactivex.disposables.Disposable;
 
 public class NetworkMonitor {
     private static final String TAG = "NetworkMonitorTAG";
-    public static final int LOSS_GAP = 50;
+    public static final int LOSS_GAP = 100;
     public static final int MIN_GAP = 10;
     private Observable<NetworkQuality> observable;
     private ObservableEmitter<NetworkQuality> networkEmitter;

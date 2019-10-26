@@ -1,12 +1,13 @@
 package com.hiscene.touch;
 
 import android.app.Activity;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
+import com.hiscene.okhttp.OKHttpTest;
 import com.hiscene.testapp.R;
 
 public class TouchActivity extends Activity {
@@ -19,6 +20,15 @@ public class TouchActivity extends Activity {
         View view = getWindow().getDecorView();
         int option = View.SYSTEM_UI_FLAG_FULLSCREEN;
         view.setSystemUiVisibility(option);
+
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                OKHttpTest okHttpTest = new OKHttpTest();
+                okHttpTest.responseCaching();
+            }
+        }).start();
     }
 
     @Override

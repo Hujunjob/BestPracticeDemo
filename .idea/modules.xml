@@ -13,6 +13,8 @@
       <module fileurl="file://$PROJECT_DIR$/git-BestPracticeDemo.iml" filepath="$PROJECT_DIR$/git-BestPracticeDemo.iml" />
       <module fileurl="file://$PROJECT_DIR$/handdetection/handdetection.iml" filepath="$PROJECT_DIR$/handdetection/handdetection.iml" />
       <module fileurl="file://$PROJECT_DIR$/opengl/opengl.iml" filepath="$PROJECT_DIR$/opengl/opengl.iml" />
+      <module fileurl="file://$PROJECT_DIR$/rxjavastudy/rxjavastudy.iml" filepath="$PROJECT_DIR$/rxjavastudy/rxjavastudy.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ui/ui.iml" filepath="$PROJECT_DIR$/ui/ui.iml" />
       <module fileurl="file://$PROJECT_DIR$/utils/utils.iml" filepath="$PROJECT_DIR$/utils/utils.iml" />
     </modules>
   </component>

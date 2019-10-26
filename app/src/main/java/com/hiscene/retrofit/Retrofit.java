@@ -37,7 +37,7 @@ public class Retrofit {
 
     @SuppressWarnings("unchecked")
     public <T> T create(Class<T> clz) {
-        return (T) Proxy.newProxyInstance(ClassLoader.getSystemClassLoader(),
+        return (T) Proxy.newProxyInstance(clz.getClassLoader(),
                 new Class[]{clz}, new InvocationHandler() {
                     @Override
                     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
@@ -84,20 +84,20 @@ public class Retrofit {
             return baseUrl;
         }
 
-        public Builder setBaseUrl(HttpUrl baseUrl) {
+        public Builder baseUrl(HttpUrl baseUrl) {
             this.baseUrl = baseUrl;
             return this;
         }
 
-        public Builder setBaseUrl(String url) {
+        public Builder baseUrl(String url) {
             if (url.isEmpty()) {
                 throw new NullPointerException("base url is null!");
             }
-            setBaseUrl(HttpUrl.parse(url));
+            baseUrl(HttpUrl.parse(url));
             return this;
         }
 
-        public Builder setCallFactory(Call.Factory callFactory) {
+        public Builder callFactory(Call.Factory callFactory) {
             this.callFactory = callFactory;
             return this;
         }

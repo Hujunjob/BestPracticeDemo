@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,8 +7,25 @@
     tools:context=".MainActivity">
 
 
+    <TextView
+        android:id="@+id/txt_version"
+        android:text="hello world"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 
+    <Button
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:text="合成"
+        android:id="@+id/btn_pitch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 
+    <ImageView
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:src="@mipmap/ic_launcher"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 
-
-</RelativeLayout>
+</android.support.constraint.ConstraintLayout>

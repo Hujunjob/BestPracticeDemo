@@ -1,1 +1,1 @@
-include ':app', ':opengl', ':arcore', ':utils', ':handdetection'
+include ':app', ':opengl', ':arcore', ':utils', ':handdetection', ':opencv', ':djidemo'

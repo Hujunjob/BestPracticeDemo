@@ -13,7 +13,7 @@ import okio.Timeout;
 /**
  * Created by junhu on 2019-10-23
  */
-public class OKHttpCall implements Call {
+public class OKHttpCall<T> implements Call {
     private ServiceMethod serviceMethod;
 
     private Object[] args;

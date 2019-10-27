@@ -1,0 +1,45 @@
+@startuml
+
+class ArrayList {
+Object[] elementData
+size()
+}
+
+class Student{
+-long num
++String name
+#String school
+~float score
++display():void
+-display2():void
+#display3():void
+~display4():void
+}
+
+class School
+
+class Teacher
+
+interface Graph{
+    +getArea():double
+    +setWidth(float width):void
+}
+
+class Person
+class Mouth
+class Book
+
+interface Vehicle
+class Car
+class Ship
+
+Student ..> Book : 依赖关系
+School o-- Student : 聚合关系
+Mouth --* Student : 组合关系
+Student --|> Person : 泛化关系
+Teacher --|> Person : 泛化关系
+
+Car ..|> Vehicle : 实现关系
+Ship ..|> Vehicle : 实现关系
+
+@enduml

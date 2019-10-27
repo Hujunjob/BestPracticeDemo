@@ -45,7 +45,7 @@ public class Retrofit {
                         //将这些信息封装到ServiceMethod中
                         ServiceMethod serviceMethod = loadServiceMethod(method);
                         //创建okhttp的请求对象
-                        Call call = serviceMethod.toCall(args);
+                        OKHttpCall call = serviceMethod.toCall(args);
                         return call;
                     }
                 });

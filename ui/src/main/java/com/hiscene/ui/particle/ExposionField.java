@@ -125,7 +125,6 @@ public class ExposionField extends View {
             public void onAnimationStart(Animator animation) {
                 super.onAnimationStart(animation);
                 view.animate().setDuration(150).scaleX(0).scaleY(0).alpha(0).start();
-
             }
         });
         explosionAnimator.start();

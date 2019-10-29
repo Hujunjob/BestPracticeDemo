@@ -6,6 +6,8 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 
+import com.hiscene.ui.myparticle.ExplosionField;
+import com.hiscene.ui.myparticle.FallingParticleFactory;
 import com.hiscene.ui.particle.ExposionField;
 import com.hiscene.ui.particle.FallingFactory;
 
@@ -21,8 +23,11 @@ public class MainActivity extends Activity {
         view.setSystemUiVisibility(param);
 
 
-        ExposionField exposionField = new ExposionField(this,new FallingFactory());
+//        ExposionField exposionField = new ExposionField(this,new FallingFactory());
 //        exposionField.addExpostion(findViewById(R.id.image));
-        exposionField.addExpostion(findViewById(R.id.cl_container));
+//        exposionField.addExpostion(findViewById(R.id.cl_container));
+
+        ExplosionField explosionField = new ExplosionField(this,new FallingParticleFactory());
+        explosionField.addExplodeView(findViewById(R.id.image));
     }
 }

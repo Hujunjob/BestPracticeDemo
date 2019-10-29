@@ -3,8 +3,6 @@ package com.hiscene.retrofit;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 
-import okhttp3.Call;
-
 /**
  * Created by junhu on 2019-10-23
  * aop 拦截方法的存储封装类
@@ -16,7 +14,7 @@ public class ServiceMethod {
         this.builder = builder;
     }
 
-    public Call toCall(Object[] args) {
+    public OKHttpCall toCall(Object[] args) {
         //将网络请求的所有参数args，拼装
         RequestBuilder requestBuilder = new RequestBuilder(builder.httpMethod,builder.retrofit.getBaseUrl(),builder.pathUrl,builder.hasBody);
         ParameterHandler[] handlers = this.builder.parameterHandler;
@@ -28,7 +26,9 @@ public class ServiceMethod {
         for (int i = 0; i < argsNum; i++) {
             handlers[i].apply(requestBuilder,args[i].toString());
         }
-        return builder.retrofit.getCallFactory().newCall(requestBuilder.build());
+//        Call call =builder.retrofit.getCallFactory().newCall(requestBuilder.build());
+        OKHttpCall okHttpCall = new OKHttpCall(this,args);
+        return okHttpCall;
     }
 
     static final class Builder {

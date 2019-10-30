@@ -1,1 +1,1 @@
-include ':app', ':opengl', ':arcore', ':utils', ':handdetection', ':djidemo', ':pattens', ':rxjavastudy', ':ui', ':modulestudy'
+include ':app', ':opengl', ':arcore', ':utils', ':handdetection', ':djidemo', ':pattens', ':rxjavastudy', ':ui', ':modulestudy', ':eventbus'

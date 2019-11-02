@@ -68,8 +68,6 @@ public class ServiceMethod {
                 }
                 parameterHandler[i] = parseParameter(parameterAnnotations);
             }
-
-
             return new ServiceMethod(this);
         }
 

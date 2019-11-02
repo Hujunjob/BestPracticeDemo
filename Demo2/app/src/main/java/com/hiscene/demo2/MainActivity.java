@@ -22,7 +22,9 @@ public class MainActivity extends AppCompatActivity {
 
         Intent intent = new Intent();
         intent.setClass(this, Main2Activity.class);
-        startActivity(intent);
+//        startActivity(intent);
+
+
     }
 
     class FunctionNoParamNoResultImp extends FunctionNoParamNoResult {

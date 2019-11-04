@@ -1,10 +1,11 @@
 package com.hiscene.demo2;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.hiscene.demo2.eventbus.FunctionHasParamHasResult;
 import com.hiscene.demo2.eventbus.FunctionManager;
@@ -23,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent();
         intent.setClass(this, Main2Activity.class);
 //        startActivity(intent);
+
 
 
     }

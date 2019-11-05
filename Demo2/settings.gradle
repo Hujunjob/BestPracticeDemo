@@ -1,2 +1,2 @@
-include ':app', ':architecturecomponent', ':rview'
+include ':app', ':architecturecomponent', ':rview', ':network'
 rootProject.name='Demo2'

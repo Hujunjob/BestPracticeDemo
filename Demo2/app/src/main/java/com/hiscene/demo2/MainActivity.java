@@ -13,6 +13,8 @@ import com.hiscene.demo2.eventbus.FunctionNoParamNoResult;
 
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivityTAG";
+    private Thread thread;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,7 +28,42 @@ public class MainActivity extends AppCompatActivity {
 //        startActivity(intent);
 
 
+        Log.d(TAG, "onCreate: 1");
+        thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        thread.start();
 
+
+        Log.d(TAG, "onCreate: 2");
+
+        Thread t2 = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Log.d(TAG, "run: 1");
+                    thread.join();
+                    Log.d(TAG, "run: 2");
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        Log.d(TAG, "onCreate: 3");
+        t2.start();
+        try {
+            t2.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        Log.d(TAG, "onCreate: 4");
     }
 
     class FunctionNoParamNoResultImp extends FunctionNoParamNoResult {
@@ -49,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public Integer function(String s) {
-            Log.d(TAG, "function: "+s);
+            Log.d(TAG, "function: " + s);
             if (s == null) {
                 return 0;
             }
